@@ -1,27 +1,13 @@
 name: Redis container example
 on: push
 
-jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-        - 'ubuntu-latest'
-        # - 'windows-latest' # windows is currently not supported.
-        redis:
-        - '6.2'
-    name: Redis ${{ matrix.redis }} on ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup redis
-        uses: shogo82148/actions-setup-redis@v1
-        with:
-          redis-version: ${{ matrix.redis }}
-          auto-start: "false"
-
-      - name: tests with Test::RedisServer
-        run: |
-          echo "oke"
-          sleep 10
-          redis-benchmark -q
+steps:
+- uses: actions/checkout@v3
+- uses: shogo82148/actions-setup-redis@v1
+  with:
+    redis-version: '6.x'
+- name: tests with Test::RedisServer
+  run: |
+        echo "oke"
+        sleep 10
+        redis-benchmark -q
