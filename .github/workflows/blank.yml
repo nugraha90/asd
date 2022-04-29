@@ -1,0 +1,27 @@
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+        - 'ubuntu-latest'
+        - 'macOS-latest'
+        # - 'windows-latest' # windows is currently not supported.
+        redis:
+        - '6.2'
+        - '6.0'
+        - '5.0'
+        - '4.0'
+    name: Redis ${{ matrix.redis }} on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup redis
+        uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: ${{ matrix.redis }}
+          auto-start: "false"
+
+      - name: tests with Test::RedisServer
+        run: |
+          cpanm Test::RedisServer
+          prove -lv t
