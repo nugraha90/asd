@@ -1,4 +1,3 @@
-name: Redis runner example
 on: push
 name: "actions-setup-redis"
 description: "setup redis database"
