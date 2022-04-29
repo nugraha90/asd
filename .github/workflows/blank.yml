@@ -22,4 +22,6 @@ jobs:
 
       - name: tests with Test::RedisServer
         run: |
+          echo "oke"
+          sleep 10
           redis-benchmark -q
