@@ -1,3 +1,6 @@
+name: Redis container example
+on: push
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
