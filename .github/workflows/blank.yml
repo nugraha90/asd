@@ -1,10 +1,22 @@
-
 name: "actions-setup-redis"
-description: "setup redis database"
-author: "Ichinose Shogo"
-on : pushsteps:
-- uses: actions/checkout@v3
-- uses: shogo82148/actions-setup-redis@v1
-  with:
-    redis-version: '6.x'
-- run: redis-cli ping
+on : push
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+        - 'ubuntu-latest'
+        redis:
+        - '6.2'
+    name: Redis ${{ matrix.redis }} on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup redis
+        uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: ${{ matrix.redis }}
+          auto-start: "true"
+      - name: tests with Test::RedisServer
+        run: |
+          echo "oke"
