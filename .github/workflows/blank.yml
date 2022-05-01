@@ -26,6 +26,6 @@ jobs:
           auto-start: "true"
       - name: tests with Test::RedisServer
         run: |
-          npm i npm i redis
+          npm i redis
           node tes.js
           #redis-benchmark -q
