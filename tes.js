@@ -16,7 +16,7 @@ const publisher = redis.createClient({
           for await (const  { score, value } of publisher.zScanIterator('art',
           { 
             TYPE: 'string', 
-            MATCH: key, COUNT: 1
+            MATCH: 'art', COUNT: 1
           }
           )){ 
             console.log( await `[{art: ${score},"tricker":"${value}"}]`); 
