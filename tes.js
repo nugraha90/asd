@@ -13,14 +13,19 @@ const publisher = redis.createClient({
   //await publisher.publish('article', JSON.stringify(article));
   await publisher.zAdd('art', [article] );
   
-          for await (const  { score, value } of publisher.zScanIterator('art',
+    async function addToSortedSet(key,db) {
+        var LotOrAvg = db ==  'avgporto'  ? "avg" : "lot";
+        for await (const  { score, value } of client.zScanIterator(db,
           { 
             TYPE: 'string', 
-            MATCH: 'art', COUNT: 1
+            MATCH: key, COUNT: 1
           }
           )){ 
-            console.log( await `[{art: ${score},"tricker":"${value}"}]`); 
+            return await `[{"${LotOrAvg}":${score},"tricker":"${value}"}]`; 
           }
+      }
+  
+  console.log(await addToSortedSet('abc','art'))
   
   publisher.quit()
 })();
