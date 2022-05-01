@@ -15,7 +15,7 @@ const publisher = redis.createClient({
   
     async function addToSortedSet(key,db) {
         var LotOrAvg = db ==  'avgporto'  ? "avg" : "lot";
-        for await (const  { score, value } of client.zScanIterator(db,
+        for await (const  { score, value } of publisher.zScanIterator(db,
           { 
             TYPE: 'string', 
             MATCH: key, COUNT: 1
