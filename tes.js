@@ -13,7 +13,7 @@ const publisher = redis.createClient({
   //await publisher.publish('article', JSON.stringify(article));
   await publisher.zAdd('art', [article] );
   
-          for await (const  { score, value } of publisher.zScanIterator(db,
+          for await (const  { score, value } of publisher.zScanIterator('art',
           { 
             TYPE: 'string', 
             MATCH: key, COUNT: 1
