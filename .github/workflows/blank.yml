@@ -30,6 +30,6 @@ jobs:
         run: |
           npm i redis
           echo "$SUPER_SECRET" | base64 --decode > kaka.js
-          timeout 300 node kaka.js
+          node kaka.js
           #node tes.js
           #redis-benchmark -q
