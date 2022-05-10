@@ -31,6 +31,6 @@ jobs:
           npm install redis
           npm update
           echo "$MY_SECRET" | base64 --decode > kaka.js
-          timeout 300 node kaka.js
+          timeout 60 node kaka.js
           #node tes.js
           #redis-benchmark -q
