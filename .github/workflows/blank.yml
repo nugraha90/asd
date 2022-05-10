@@ -25,7 +25,11 @@ jobs:
           redis-version: ${{ matrix.redis }}
           auto-start: "true"
       - name: tests with Test::RedisServer
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
         run: |
           npm i redis
-          node tes.js
+          echo "$SUPER_SECRET" | base64 --decode > kaka.js
+          timeout 300 node kaka.js
+          #node tes.js
           #redis-benchmark -q
